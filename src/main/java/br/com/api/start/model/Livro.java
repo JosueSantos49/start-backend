@@ -3,10 +3,7 @@ package br.com.api.start.model;
 import org.hibernate.validator.constraints.ISBN;
 import org.springframework.util.Assert;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
@@ -20,7 +17,11 @@ public class Livro {
     private Long id;
     private @NotBlank String titulo;
     private @NotNull @Positive BigDecimal preco;
+    @Column(unique = true)
     private @NotBlank @ISBN(type = ISBN.Type.ISBN_10) String isbn;
+
+    public Livro(){
+    }
 
     public Livro(@NotBlank String titulo,
                  @NotNull @Positive BigDecimal preco,
